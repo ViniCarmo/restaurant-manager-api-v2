@@ -12,7 +12,7 @@ public class User {
     private String email;
     private String password;
     private UserType userType;
-    private LocalDateTime createdAt;
+    private final LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
     public User(UUID id, String name, String email, String password, UserType userType, LocalDateTime createdAt, LocalDateTime updatedAt) {
@@ -25,34 +25,54 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
-    public void changeName(String newName){
-        if(name == null || name.isBlank()){
+    private static void validateName(String name) {
+        if (name == null || name.isBlank()) {
             throw new IllegalArgumentException("Name cannot be null or blank");
         }
+    }
+
+    private static void validateEmail(String email) {
+        if (email == null || email.isBlank()) {
+            throw new IllegalArgumentException("Email cannot be null or blank");
+        }
+    }
+
+    public static void validatePassword(String password) {
+        if (password == null || password.isBlank()) {
+            throw new IllegalArgumentException("Password cannot be null or blank");
+        }
+    }
+
+    public void changeName(String newName) {
+        validateName(newName);
         this.name = newName;
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void changeEmail(String newEmail){
+    public void changeEmail(String newEmail) {
+        validateEmail(newEmail);
         this.email = newEmail;
         this.updatedAt = LocalDateTime.now();
     }
 
-    public void updatePassword(String newPassword){
+    public void updatePassword(String newPassword) {
+        validatePassword(newPassword);
         this.password = newPassword;
         this.updatedAt = LocalDateTime.now();
     }
 
-    public boolean isCustomer(){
+    public boolean isCustomer() {
         return this.userType.isCustomer();
     }
 
-    public boolean isRestaurantOwner(){
+    public boolean isRestaurantOwner() {
         return this.userType.isRestaurantOwner();
     }
 
     public static User create(String name, String email, String password, UserType userType) {
-        return new User(null, name, email, password, userType, LocalDateTime.now(), LocalDateTime.now());
+        validateName(name);
+        validateEmail(email);
+        return new User(UUID.randomUUID(), name, email, password, userType, LocalDateTime.now(), LocalDateTime.now());
     }
 
     public UUID getId() {
