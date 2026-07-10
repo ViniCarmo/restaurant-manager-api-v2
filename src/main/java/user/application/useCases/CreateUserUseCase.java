@@ -3,6 +3,7 @@ package user.application.useCases;
 import org.springframework.stereotype.Component;
 import user.domain.entity.User;
 import user.domain.entity.UserRepository;
+import user.domain.exceptions.EmailAlreadyInUseException;
 import userType.domain.UserType;
 
 
@@ -17,7 +18,7 @@ public class CreateUserUseCase {
 
     public User execute(String name, String email, String password, UserType userType){
     if(userRepository.findByEmail(email).isPresent()){
-        throw new RuntimeException("Email already in use.");
+        throw new EmailAlreadyInUseException(email);
     }
         User user = User.create(name, email, password, userType);
         return userRepository.save(user);

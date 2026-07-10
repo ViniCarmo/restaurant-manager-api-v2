@@ -3,6 +3,7 @@ package user.application.useCases;
 import org.springframework.stereotype.Component;
 import user.domain.entity.User;
 import user.domain.entity.UserRepository;
+import user.domain.exceptions.UserNotFoundException;
 
 @Component
 public class FindByEmailUseCase {
@@ -14,7 +15,7 @@ public class FindByEmailUseCase {
     }
 
     public User execute(String email) {
-        return  userRepository.findByEmail(email).orElseThrow(() -> new RuntimeException("User not found"));
+        return  userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(email));
 
     }
 }

@@ -1,5 +1,6 @@
 package user.domain.entity;
 
+import user.domain.exceptions.UserValidationException;
 import userType.domain.UserType;
 
 import java.time.LocalDateTime;
@@ -27,19 +28,19 @@ public class User {
 
     private static void validateName(String name) {
         if (name == null || name.isBlank()) {
-            throw new IllegalArgumentException("Name cannot be null or blank");
+            throw new UserValidationException("Name cannot be null or blank");
         }
     }
 
     private static void validateEmail(String email) {
         if (email == null || email.isBlank()) {
-            throw new IllegalArgumentException("Email cannot be null or blank");
+            throw new UserValidationException("Email cannot be null or blank");
         }
     }
 
     private static void validatePassword(String password) {
         if (password == null || password.isBlank()) {
-            throw new IllegalArgumentException("Password cannot be null or blank");
+            throw new UserValidationException("Password cannot be null or blank");
         }
     }
 
