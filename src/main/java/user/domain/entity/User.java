@@ -37,7 +37,7 @@ public class User {
         }
     }
 
-    public static void validatePassword(String password) {
+    private static void validatePassword(String password) {
         if (password == null || password.isBlank()) {
             throw new IllegalArgumentException("Password cannot be null or blank");
         }
