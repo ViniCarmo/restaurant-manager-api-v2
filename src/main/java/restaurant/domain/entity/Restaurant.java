@@ -1,6 +1,7 @@
 package restaurant.domain.entity;
 
 import restaurant.domain.enums.KitchenType;
+import restaurant.domain.exception.RestaurantValidationException;
 import user.domain.entity.User;
 
 import java.time.LocalDateTime;
@@ -50,13 +51,13 @@ public class Restaurant {
 
     private static void validateName(String name){
         if(name == null || name.isBlank()){
-            throw new IllegalArgumentException("Name cannot be null or empty.");
+            throw new RestaurantValidationException("Name cannot be null or empty.");
         }
     }
 
     private static void validateAddress(String address){
         if(address == null || address.isBlank()){
-            throw new IllegalArgumentException("Address cannot be null or empty.");
+            throw new RestaurantValidationException("Address cannot be null or empty.");
         }
     }
 
@@ -66,12 +67,11 @@ public class Restaurant {
 
     public boolean belongsTo(User user) {
         return restaurantOwner.equals(user);
-
     }
 
     public void changeOpeningHours(LocalTime openingTime, LocalTime closingTime){
         if (openingTime.isAfter(closingTime)) {
-            throw new IllegalArgumentException("Opening time cannot be after closing time.");
+            throw new RestaurantValidationException("Opening time cannot be after closing time.");
         }
         this.openingTime = openingTime;
         this.closingTime = closingTime;
