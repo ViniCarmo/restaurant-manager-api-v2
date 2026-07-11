@@ -1,5 +1,6 @@
 package restaurant.application.useCases;
 
+import org.springframework.stereotype.Component;
 import restaurant.domain.Repository.RestaurantRepository;
 import restaurant.domain.entity.Restaurant;
 import restaurant.domain.exception.RestaurantNotFoundException;
@@ -7,6 +8,7 @@ import restaurant.domain.exception.RestaurantNotFoundException;
 import java.time.LocalTime;
 import java.util.UUID;
 
+@Component
 public class UpdateRestaurantUseCase {
 
     private final RestaurantRepository restaurantRepository;

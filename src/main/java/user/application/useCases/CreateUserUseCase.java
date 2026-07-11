@@ -17,7 +17,7 @@ public class CreateUserUseCase {
     }
 
     public User execute(String name, String email, String password, UserType userType){
-    if(userRepository.findByEmail(email).isPresent()){
+    if(userRepository.findByEmailIgnoreCase(email).isPresent()){
         throw new EmailAlreadyInUseException(email);
     }
         User user = User.create(name, email, password, userType);

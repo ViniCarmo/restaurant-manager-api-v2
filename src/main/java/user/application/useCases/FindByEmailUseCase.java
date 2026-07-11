@@ -15,7 +15,7 @@ public class FindByEmailUseCase {
     }
 
     public User execute(String email) {
-        return  userRepository.findByEmail(email).orElseThrow(() -> new UserNotFoundException(email));
+        return  userRepository.findByEmailIgnoreCase(email).orElseThrow(() -> new UserNotFoundException(email));
 
     }
 }

@@ -1,10 +1,12 @@
 package user.application.useCases;
 
+import org.springframework.stereotype.Component;
 import user.domain.entity.User;
 import user.domain.Repository.UserRepository;
 
 import java.util.UUID;
 
+@Component
 public class UpdateUserPasswordUseCase {
 
     private final UserRepository userRepository;

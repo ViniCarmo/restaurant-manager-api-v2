@@ -1,11 +1,13 @@
 package menuItem.application.useCases;
 
 import menuItem.domain.repository.MenuItemRepository;
+import org.springframework.stereotype.Component;
 import restaurant.domain.Repository.RestaurantRepository;
 import restaurant.domain.exception.RestaurantNotFoundException;
 
 import java.util.UUID;
 
+@Component
 public class DeleteByIdUseCase {
 
     private final MenuItemRepository menuItemRepository;
