@@ -2,7 +2,8 @@ package user.application.useCases;
 
 import org.springframework.stereotype.Component;
 import user.domain.entity.User;
-import user.domain.entity.UserRepository;
+import user.domain.Repository.UserRepository;
+import user.domain.exceptions.UserNotFoundException;
 
 import java.util.UUID;
 
@@ -17,6 +18,6 @@ public class FindByIdUseCase {
     }
 
     public User execute(UUID id){
-        return userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 }

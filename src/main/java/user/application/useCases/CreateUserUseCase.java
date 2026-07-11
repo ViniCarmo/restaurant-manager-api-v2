@@ -2,7 +2,7 @@ package user.application.useCases;
 
 import org.springframework.stereotype.Component;
 import user.domain.entity.User;
-import user.domain.entity.UserRepository;
+import user.domain.Repository.UserRepository;
 import user.domain.exceptions.EmailAlreadyInUseException;
 import userType.domain.UserType;
 

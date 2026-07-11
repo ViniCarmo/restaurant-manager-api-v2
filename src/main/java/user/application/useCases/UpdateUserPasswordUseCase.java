@@ -1,7 +1,7 @@
 package user.application.useCases;
 
 import user.domain.entity.User;
-import user.domain.entity.UserRepository;
+import user.domain.Repository.UserRepository;
 
 import java.util.UUID;
 

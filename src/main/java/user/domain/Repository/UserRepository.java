@@ -1,4 +1,6 @@
-package user.domain.entity;
+package user.domain.Repository;
+
+import user.domain.entity.User;
 
 import java.util.Optional;
 import java.util.UUID;
