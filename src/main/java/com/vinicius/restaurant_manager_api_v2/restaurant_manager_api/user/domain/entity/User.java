@@ -1,7 +1,7 @@
-package user.domain.entity;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity;
 
-import user.domain.exceptions.UserValidationException;
-import userType.domain.UserType;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserValidationException;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.entity.UserType;
 
 import java.time.LocalDateTime;
 import java.util.UUID;
@@ -38,6 +38,8 @@ public class User {
         }
     }
 
+
+
     private static void validatePassword(String password) {
         if (password == null || password.isBlank()) {
             throw new UserValidationException("Password cannot be null or blank");
@@ -73,6 +75,7 @@ public class User {
     public static User create(String name, String email, String password, UserType userType) {
         validateName(name);
         validateEmail(email);
+        validatePassword(password);
         return new User(UUID.randomUUID(), name, email, password, userType, LocalDateTime.now(), LocalDateTime.now());
     }
 

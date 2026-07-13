@@ -1,8 +1,8 @@
-package restaurant.domain.entity;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.entity;
 
-import restaurant.domain.enums.KitchenType;
-import restaurant.domain.exception.RestaurantValidationException;
-import user.domain.entity.User;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.enums.KitchenType;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.exception.RestaurantValidationException;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
 
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -35,6 +35,9 @@ public class Restaurant {
     public static Restaurant create(String name, String address, KitchenType kitchenType, LocalTime openingTime, LocalTime closingTime, User restaurantOwner) {
         validateName(name);
         validateAddress(address);
+        validateKitchenType(kitchenType);
+        validateRestaurantOwner(restaurantOwner);
+        validateOpeningHours(openingTime, closingTime);
 
         return new Restaurant(
                 UUID.randomUUID(),
@@ -49,11 +52,37 @@ public class Restaurant {
         );
     }
 
+    private static void validateKitchenType(KitchenType kitchenType) {
+        if (kitchenType == null) {
+            throw new RestaurantValidationException("Kitchen type cannot be null.");
+        }
+    }
+
+    private static void validateRestaurantOwner(User owner) {
+        if (owner == null) {
+            throw new RestaurantValidationException("Restaurant owner cannot be null.");
+        }
+    }
+
+    private static void validateOpeningHours(LocalTime opening, LocalTime closing) {
+
+        if (opening == null || closing == null) {
+            throw new RestaurantValidationException("Opening and closing time are required.");
+        }
+
+        if (opening.isAfter(closing)) {
+            throw new RestaurantValidationException(
+                    "Opening time cannot be after closing time.");
+        }
+    }
+
     private static void validateName(String name){
         if(name == null || name.isBlank()){
             throw new RestaurantValidationException("Name cannot be null or empty.");
         }
     }
+
+
 
     private static void validateAddress(String address){
         if(address == null || address.isBlank()){
@@ -66,7 +95,7 @@ public class Restaurant {
     }
 
     public boolean belongsTo(User user) {
-        return restaurantOwner.equals(user);
+        return restaurantOwner.getId().equals(user.getId());
     }
 
     public void changeOpeningHours(LocalTime openingTime, LocalTime closingTime){
