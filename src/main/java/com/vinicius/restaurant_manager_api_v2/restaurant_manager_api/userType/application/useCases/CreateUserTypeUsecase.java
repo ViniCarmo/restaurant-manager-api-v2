@@ -13,7 +13,7 @@ public class CreateUserTypeUsecase {
         this.userTypeRepository = userTypeRepository;
     }
 
-    public UserType Execute(String name) {
+    public UserType execute(String name) {
         if (userTypeRepository.existsByNameIgnoreCase(name)) {
             throw new UserTypeAlreadyExistsException("UserType with name " + name + " already exists");
         }
