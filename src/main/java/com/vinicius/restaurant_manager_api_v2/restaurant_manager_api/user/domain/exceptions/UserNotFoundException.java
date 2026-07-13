@@ -1,4 +1,4 @@
-package user.domain.exceptions;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions;
 
 import java.util.UUID;
 
