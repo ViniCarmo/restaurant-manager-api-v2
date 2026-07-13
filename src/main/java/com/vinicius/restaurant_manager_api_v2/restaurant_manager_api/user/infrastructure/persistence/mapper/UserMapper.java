@@ -1,8 +1,8 @@
-package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infrastructure.mapper;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infrastructure.persistence.mapper;
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infrastructure.entity.UserJpaEntity;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.infrastructure.mapper.UserTypeMapper;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.infrastructure.persistence.mapper.UserTypeMapper;
 
 public class UserMapper {
 

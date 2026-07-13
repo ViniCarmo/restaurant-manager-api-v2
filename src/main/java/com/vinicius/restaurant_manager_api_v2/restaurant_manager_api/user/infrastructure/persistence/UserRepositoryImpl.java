@@ -2,7 +2,7 @@ package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infra
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.Repository.UserRepository;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infrastructure.mapper.UserMapper;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.infrastructure.persistence.mapper.UserMapper;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

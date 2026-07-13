@@ -14,6 +14,13 @@ public interface RestaurantRepository {
 
     List<Restaurant> findAll();
 
+    Optional<Restaurant> findByNameIgnoreCase(String name);
+
+
+    boolean existsByNameIgnoreCase(String name);
+
+    void delete(Restaurant restaurant);
+
     void deleteById(UUID id);
 
     List<Restaurant> searchRestaurant(String name, KitchenType kitchenType);
