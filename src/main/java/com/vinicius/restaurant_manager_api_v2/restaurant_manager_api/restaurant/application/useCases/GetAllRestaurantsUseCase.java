@@ -7,11 +7,11 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.
 import java.util.List;
 
 @Component
-public class getAllRestaurantsUseCase {
+public class GetAllRestaurantsUseCase {
 
     private final RestaurantRepository restaurantRepository;
 
-    public getAllRestaurantsUseCase(RestaurantRepository restaurantRepository) {
+    public GetAllRestaurantsUseCase(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 

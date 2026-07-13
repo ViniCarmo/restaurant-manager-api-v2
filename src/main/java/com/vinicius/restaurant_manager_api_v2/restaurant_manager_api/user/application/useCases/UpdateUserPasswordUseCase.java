@@ -1,7 +1,6 @@
 package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.application.useCases;
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.exception.UserTypeNotFoundException;
 import org.springframework.stereotype.Component;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.Repository.UserRepository;

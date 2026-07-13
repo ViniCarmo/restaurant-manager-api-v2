@@ -16,7 +16,7 @@ public class SearchRestaurantUseCase {
         this.restaurantRepository = restaurantRepository;
     }
 
-    public List<Restaurant> searchRestaurant(String name,
+    public List<Restaurant> execute(String name,
                                              KitchenType kitchenType){
 
         return restaurantRepository.searchRestaurant(name, kitchenType);
