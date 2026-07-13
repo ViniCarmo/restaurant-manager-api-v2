@@ -6,11 +6,11 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
 
 @Component
-public class FindByEmailUseCase {
+public class FindUserByEmailUseCase {
 
     private final UserRepository userRepository;
 
-    public FindByEmailUseCase(UserRepository userRepository) {
+    public FindUserByEmailUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

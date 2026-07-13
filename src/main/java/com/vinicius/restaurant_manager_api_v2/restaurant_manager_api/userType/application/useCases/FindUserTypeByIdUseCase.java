@@ -2,20 +2,22 @@ package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.a
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.exception.UserTypeNotFoundException;
 import org.springframework.stereotype.Component;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.entity.UserType;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.repository.UserTypeRepository;
 
 import java.util.UUID;
 
 @Component
-public class DeleteByIdUsecase {
+public class FindUserTypeByIdUseCase {
+
     private final UserTypeRepository userTypeRepository;
 
-    public DeleteByIdUsecase(UserTypeRepository userTypeRepository) {
+    public FindUserTypeByIdUseCase(UserTypeRepository userTypeRepository) {
         this.userTypeRepository = userTypeRepository;
     }
 
-    public void execute(UUID id) {
-        userTypeRepository.findById(id).orElseThrow(() -> new UserTypeNotFoundException("UserType not found"));
-        userTypeRepository.deleteById(id);
+    public UserType execute(UUID id) {
+        return userTypeRepository.findById(id).orElseThrow(()
+                -> new UserTypeNotFoundException("User type with ID " + id + " not found"));
     }
 }
