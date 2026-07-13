@@ -13,7 +13,7 @@ import java.util.UUID;
 @Component
 public class FindByRestaurantUseCase {
 
-    private final MenuItemRepository   menuItemRepository;
+    private final MenuItemRepository menuItemRepository;
     private final RestaurantRepository restaurantRepository;
 
     public FindByRestaurantUseCase(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository) {

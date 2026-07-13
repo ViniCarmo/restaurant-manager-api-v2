@@ -6,7 +6,6 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.do
 import org.springframework.stereotype.Component;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.Repository.RestaurantRepository;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.entity.Restaurant;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.exception.RestaurantNotFoundException;
 
 import java.math.BigDecimal;
 import java.util.UUID;

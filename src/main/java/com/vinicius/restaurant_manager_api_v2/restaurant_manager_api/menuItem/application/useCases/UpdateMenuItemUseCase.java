@@ -26,6 +26,7 @@ public class UpdateMenuItemUseCase {
         menuItem.changeDescription(description);
         menuItem.changePrice(price);
         menuItem.changePhotoPath(photoPath);
+        menuItem.changeDineInOnly(dineInOnly);
 
         return menuItemRepository.save(menuItem);
     }

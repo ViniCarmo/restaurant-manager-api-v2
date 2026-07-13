@@ -13,7 +13,7 @@ public class FindByNameUseCase {
         this.userTypeRepository = userTypeRepository;
     }
 
-    public UserType execute(String name){
+    public UserType execute(String name) {
         return userTypeRepository.findByNameIgnoreCase(name).orElseThrow(()
                 -> new UserTypeNotFoundException("User type with name " + name + " not found"));
     }

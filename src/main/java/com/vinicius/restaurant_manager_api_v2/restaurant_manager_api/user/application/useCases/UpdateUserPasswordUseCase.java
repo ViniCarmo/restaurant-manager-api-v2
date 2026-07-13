@@ -15,7 +15,7 @@ public class UpdateUserPasswordUseCase {
         this.userRepository = userRepository;
     }
 
-    public void execute(UUID id, String newPassword){
+    public void execute(UUID id, String newPassword) {
         User user = userRepository.findById(id).orElseThrow(() -> new RuntimeException("User not found"));
         user.updatePassword(newPassword);
         userRepository.save(user);

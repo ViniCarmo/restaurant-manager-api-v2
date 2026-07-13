@@ -5,13 +5,20 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.do
 import java.util.UUID;
 
 public class UserType {
-
     private final UUID id;
     private String name;
 
     public UserType(UUID id, String name) {
         this.id = id;
         this.name = name;
+    }
+
+    public boolean isCustomer() {
+        return "CUSTOMER".equals(name);
+    }
+
+    public boolean isRestaurantOwner(){
+        return "RESTAURANT_OWNER".equals(name);
     }
 
     public static UserType create(String name) {

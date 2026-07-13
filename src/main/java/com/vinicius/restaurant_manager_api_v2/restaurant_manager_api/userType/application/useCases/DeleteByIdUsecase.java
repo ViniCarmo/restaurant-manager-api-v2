@@ -14,7 +14,7 @@ public class DeleteByIdUsecase {
         this.userTypeRepository = userTypeRepository;
     }
 
-    public void execute(UUID id){
+    public void execute(UUID id) {
         userTypeRepository.findById(id).orElseThrow(() -> new UserTypeNotFoundException("UserType not found"));
         userTypeRepository.deleteById(id);
     }

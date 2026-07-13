@@ -16,7 +16,7 @@ public class FindByIdUseCase {
         this.userTypeRepository = userTypeRepository;
     }
 
-    public UserType execute(UUID id){
+    public UserType execute(UUID id) {
         return userTypeRepository.findById(id).orElseThrow(()
                 -> new UserTypeNotFoundException("User type with ID " + id + " not found"));
     }

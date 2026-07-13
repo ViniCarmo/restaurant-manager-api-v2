@@ -30,6 +30,7 @@ public class UpdateUserUseCase {
         }
 
         user.changeEmail(email);
+        user.changeName(name);
 
         return userRepository.save(user);
     }

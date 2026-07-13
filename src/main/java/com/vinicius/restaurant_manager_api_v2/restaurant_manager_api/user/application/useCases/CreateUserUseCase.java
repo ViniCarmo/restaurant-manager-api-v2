@@ -16,10 +16,10 @@ public class CreateUserUseCase {
         this.userRepository = userRepository;
     }
 
-    public User execute(String name, String email, String password, UserType userType){
-    if(userRepository.findByEmailIgnoreCase(email).isPresent()){
-        throw new EmailAlreadyInUseException(email);
-    }
+    public User execute(String name, String email, String password, UserType userType) {
+        if (userRepository.findByEmailIgnoreCase(email).isPresent()) {
+            throw new EmailAlreadyInUseException(email);
+        }
         User user = User.create(name, email, password, userType);
         return userRepository.save(user);
     }

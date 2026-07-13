@@ -3,7 +3,6 @@ package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.a
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.exception.MenuItemNotFoundException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.repository.MenuItemRepository;
 import org.springframework.stereotype.Component;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.exception.RestaurantNotFoundException;
 
 import java.util.UUID;
 

@@ -17,7 +17,7 @@ public class FindByIdUseCase {
         this.userRepository = userRepository;
     }
 
-    public User execute(UUID id){
+    public User execute(UUID id) {
         return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
     }
 }

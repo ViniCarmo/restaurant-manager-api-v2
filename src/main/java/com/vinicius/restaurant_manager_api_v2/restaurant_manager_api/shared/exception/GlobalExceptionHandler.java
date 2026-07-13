@@ -1,4 +1,4 @@
-package shared.exception;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.shared.exception;
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.exception.MenuItemNotFoundException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.exception.MenuItemValidationException;

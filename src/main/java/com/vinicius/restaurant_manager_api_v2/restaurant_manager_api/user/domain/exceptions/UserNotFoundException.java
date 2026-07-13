@@ -2,12 +2,12 @@ package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domai
 
 import java.util.UUID;
 
-public class UserNotFoundException extends RuntimeException{
-    public UserNotFoundException(UUID id){
+public class UserNotFoundException extends RuntimeException {
+    public UserNotFoundException(UUID id) {
         super("User with id " + id + " not found");
     }
 
-    public UserNotFoundException(String email){
+    public UserNotFoundException(String email) {
         super("User with email " + email + " not found");
     }
 }
