@@ -1,4 +1,4 @@
-package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.infrastructure.persistence;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.infrastructure.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

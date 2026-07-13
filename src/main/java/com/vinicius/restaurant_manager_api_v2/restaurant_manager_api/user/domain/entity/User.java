@@ -101,4 +101,8 @@ public class User {
     public LocalDateTime getUpdatedAt() {
         return updatedAt;
     }
+
+    public String getPassword() {
+        return password;
+    }
 }
