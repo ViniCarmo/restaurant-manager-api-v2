@@ -16,5 +16,7 @@ public interface MenuItemRepository {
 
     List<MenuItem> findByRestaurant(Restaurant restaurant);
 
+    void delete(MenuItem menuItem);
+
     void deleteById(UUID id);
 }
