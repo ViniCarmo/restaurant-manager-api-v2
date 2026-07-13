@@ -1,6 +1,7 @@
 package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.entity;
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.exception.MenuItemNotFoundException;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.exception.MenuItemValidationException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.entity.Restaurant;
 
 import java.math.BigDecimal;
@@ -33,22 +34,22 @@ public class MenuItem {
 
     private static void validateName(String name) {
         if (name == null || name.isBlank()) {
-            throw new MenuItemNotFoundException("Name cannot be null or empty");
+            throw new MenuItemValidationException("Name cannot be null or empty");
         }
     }
 
     private static void validatePrice(BigDecimal price) {
         if (price == null) {
-            throw new MenuItemNotFoundException("Price cannot be null");
+            throw new MenuItemValidationException("Price cannot be null");
         }
         if (price.compareTo(BigDecimal.ZERO) <= 0) {
-            throw new MenuItemNotFoundException("Price must be greater than zero");
+            throw new MenuItemValidationException("Price must be greater than zero");
         }
     }
 
     private static void validateRestaurant(Restaurant restaurant) {
         if (restaurant == null) {
-            throw new MenuItemNotFoundException("Restaurant cannot be null");
+            throw new MenuItemValidationException("Restaurant cannot be null");
         }
     }
 

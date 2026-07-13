@@ -7,11 +7,11 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class DeleteByIdUseCase {
+public class DeleteMenuByIdUseCase {
 
     private final MenuItemRepository menuItemRepository;
 
-    public DeleteByIdUseCase(MenuItemRepository menuItemRepository) {
+    public DeleteMenuByIdUseCase(MenuItemRepository menuItemRepository) {
         this.menuItemRepository = menuItemRepository;
     }
 

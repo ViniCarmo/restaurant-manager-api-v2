@@ -11,12 +11,12 @@ import java.util.List;
 import java.util.UUID;
 
 @Component
-public class FindByRestaurantUseCase {
+public class FindMenuByRestaurantUseCase {
 
     private final MenuItemRepository menuItemRepository;
     private final RestaurantRepository restaurantRepository;
 
-    public FindByRestaurantUseCase(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository) {
+    public FindMenuByRestaurantUseCase(MenuItemRepository menuItemRepository, RestaurantRepository restaurantRepository) {
         this.menuItemRepository = menuItemRepository;
         this.restaurantRepository = restaurantRepository;
     }

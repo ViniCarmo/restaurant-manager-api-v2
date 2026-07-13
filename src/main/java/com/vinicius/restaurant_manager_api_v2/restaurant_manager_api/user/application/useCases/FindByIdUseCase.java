@@ -18,6 +18,6 @@ public class FindByIdUseCase {
     }
 
     public User execute(UUID id) {
-        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found"));
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 }
