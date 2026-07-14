@@ -1,5 +1,6 @@
 package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.application.useCases;
 
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.PasswordEncoderService;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.exception.UserTypeNotFoundException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.repository.UserTypeRepository;
 import org.springframework.stereotype.Component;
@@ -16,10 +17,12 @@ public class CreateUserUseCase {
 
     private final UserRepository userRepository;
     private final UserTypeRepository userTypeRepository;
+    private final PasswordEncoderService passwordEncoderService;
 
-    public CreateUserUseCase(UserRepository userRepository, UserTypeRepository userTypeRepository) {
+    public CreateUserUseCase(UserRepository userRepository, UserTypeRepository userTypeRepository, PasswordEncoderService passwordEncoderService) {
         this.userRepository = userRepository;
         this.userTypeRepository = userTypeRepository;
+        this.passwordEncoderService = passwordEncoderService;
     }
 
     public User execute(String name, String email, String password, UUID userTypeId) {
@@ -30,10 +33,12 @@ public class CreateUserUseCase {
                 .orElseThrow(() ->
                         new UserTypeNotFoundException("UserType not found"));
 
+        String encodedPassword = passwordEncoderService.encode(password);
+
         User user = User.create(
                 name,
                 email,
-                password,
+                encodedPassword,
                 userType
         );
 
