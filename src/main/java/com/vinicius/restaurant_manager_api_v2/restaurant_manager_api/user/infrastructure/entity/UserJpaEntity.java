@@ -28,7 +28,7 @@ public class UserJpaEntity {
     @Column(nullable = false)
     private String password;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "user_type_id", nullable = false)
     private UserTypeJpaEntity userType;
 
