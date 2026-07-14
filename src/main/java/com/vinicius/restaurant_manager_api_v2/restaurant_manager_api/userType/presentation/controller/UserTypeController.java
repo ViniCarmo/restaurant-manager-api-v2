@@ -37,7 +37,7 @@ public class UserTypeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteById(UUID id) {
+    public ResponseEntity<Void> deleteById(@PathVariable UUID id) {
         deleteUserTypeByIdUsecase.execute(id);
         return ResponseEntity.noContent().build();
     }
@@ -49,7 +49,7 @@ public class UserTypeController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UserTypeResponse> FindById(UUID id) {
+    public ResponseEntity<UserTypeResponse> FindById(@PathVariable UUID id) {
         var userType = findUserTypeByIdUseCase.execute(id);
         return ResponseEntity.ok(UserTypePresentationMapper.toResponse(userType));
     }
