@@ -38,7 +38,7 @@ public class TokenService {
                 .parseSignedClaims(token)
                 .getPayload();
 
-        return claims.getSubject(); // retorna o email
+        return claims.getSubject();
     }
 
     private SecretKey getSigningKey() {
