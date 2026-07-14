@@ -12,29 +12,29 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.net.URI;
 import java.util.List;
 import java.util.UUID;
 
 @RestController
 @RequestMapping("/api/v1/restaurants")
-public class RestauratController {
+public class RestaurantController {
 
     private final CreateRestaurantUseCase createRestaurantUseCase;
     private final DeleteRestaurantById deleteRestaurantById;
     private final GetAllRestaurantsUseCase getAllRestaurantsUseCase;
-    private final RestaurantFindByIdUseCase restaurantFindByIdUseCase;
+    private final FindRestaurantByIdUseCase findRestaurantByIdUseCase;
     private final SearchRestaurantUseCase searchRestaurantUseCase;
     private final UpdateRestaurantUseCase updateRestaurantUseCase;
 
-    public RestauratController(CreateRestaurantUseCase createRestaurantUseCase, DeleteRestaurantById deleteRestaurantById, GetAllRestaurantsUseCase getAllRestaurantsUseCase, RestaurantFindByIdUseCase restaurantFindByIdUseCase, SearchRestaurantUseCase searchRestaurantUseCase, UpdateRestaurantUseCase updateRestaurantUseCase) {
+    public RestaurantController(CreateRestaurantUseCase createRestaurantUseCase, DeleteRestaurantById deleteRestaurantById, GetAllRestaurantsUseCase getAllRestaurantsUseCase, FindRestaurantByIdUseCase findRestaurantByIdUseCase, SearchRestaurantUseCase searchRestaurantUseCase, UpdateRestaurantUseCase updateRestaurantUseCase) {
         this.createRestaurantUseCase = createRestaurantUseCase;
         this.deleteRestaurantById = deleteRestaurantById;
         this.getAllRestaurantsUseCase = getAllRestaurantsUseCase;
-        this.restaurantFindByIdUseCase = restaurantFindByIdUseCase;
+        this.findRestaurantByIdUseCase = findRestaurantByIdUseCase;
         this.searchRestaurantUseCase = searchRestaurantUseCase;
         this.updateRestaurantUseCase = updateRestaurantUseCase;
     }
+
 
     @PostMapping
     public ResponseEntity<RestaurantResponseDto> create(
@@ -77,6 +77,17 @@ public class RestauratController {
                         .toList();
 
         return ResponseEntity.ok(response);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<RestaurantResponseDto> findById(
+            @PathVariable UUID id) {
+
+        return ResponseEntity.ok(
+                RestaurantPresentationMapper.toResponse(
+                        findRestaurantByIdUseCase.execute(id)
+                )
+        );
     }
 
     @PutMapping("/{id}")

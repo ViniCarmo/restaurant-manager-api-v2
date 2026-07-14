@@ -18,7 +18,7 @@ public class UserType {
     }
 
     public boolean isRestaurantOwner(){
-        return "RESTAURANT_OWNER".equals(name);
+        return "RESTAURANT OWNER".equalsIgnoreCase(name);
     }
 
     public static UserType create(String name) {

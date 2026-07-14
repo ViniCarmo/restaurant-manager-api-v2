@@ -1,4 +1,4 @@
-package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.entity;
+package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.infrastructure.entity;
 
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.infrastructure.entity.RestaurantJpaEntity;
@@ -39,9 +39,9 @@ public class MenuItemJpaEntity {
     @JoinColumn(name = "restaurant_id", nullable = false)
     private RestaurantJpaEntity restaurant;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }

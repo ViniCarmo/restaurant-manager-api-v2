@@ -32,9 +32,9 @@ public class UserJpaEntity {
     @JoinColumn(name = "user_type_id", nullable = false)
     private UserTypeJpaEntity userType;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime createdAt;
 
-    @Column(nullable = false)
+    @Column(name = "updated_at", nullable = false)
     private LocalDateTime updatedAt;
 }

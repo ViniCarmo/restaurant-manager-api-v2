@@ -18,8 +18,6 @@ public interface RestaurantJpaRepository extends JpaRepository<RestaurantJpaEnti
 
     List<RestaurantJpaEntity> findByNameContainingIgnoreCase(String name);
 
-    void delete(Restaurant restaurant);
-
 
     List<RestaurantJpaEntity> findByKitchenType(KitchenType kitchenType);
 

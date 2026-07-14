@@ -53,12 +53,6 @@ public class UserTypeRepositoryImpl implements UserTypeRepository {
         return repository.existsByNameIgnoreCase(name);
     }
 
-    @Override
-    public void delete(UserType userType) {
-        repository.delete(
-                UserTypeMapper.toJpaEntity(userType)
-        );
-    }
 
     @Override
     public void deleteById(UUID id) {

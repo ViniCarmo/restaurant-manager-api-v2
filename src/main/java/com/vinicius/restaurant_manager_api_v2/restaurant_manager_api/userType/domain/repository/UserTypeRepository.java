@@ -17,8 +17,6 @@ public interface UserTypeRepository {
 
     boolean existsByNameIgnoreCase(String name);
 
-    void delete(UserType userType);
-
     void deleteById(UUID id);
 
 }

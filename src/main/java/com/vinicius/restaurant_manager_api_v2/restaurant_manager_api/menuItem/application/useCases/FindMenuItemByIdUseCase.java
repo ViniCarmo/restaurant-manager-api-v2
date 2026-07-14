@@ -8,11 +8,11 @@ import org.springframework.stereotype.Component;
 import java.util.UUID;
 
 @Component
-public class FindByIdMenuUseCase {
+public class FindMenuItemByIdUseCase {
 
     private final MenuItemRepository menuItemRepository;
 
-    public FindByIdMenuUseCase(MenuItemRepository menuItemRepository) {
+    public FindMenuItemByIdUseCase(MenuItemRepository menuItemRepository) {
         this.menuItemRepository = menuItemRepository;
     }
 

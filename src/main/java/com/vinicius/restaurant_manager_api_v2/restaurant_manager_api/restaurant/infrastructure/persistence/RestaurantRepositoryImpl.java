@@ -52,10 +52,6 @@ public class RestaurantRepositoryImpl implements RestaurantRepository {
         return repository.existsByNameIgnoreCase(name);
     }
 
-    @Override
-    public void delete(Restaurant restaurant) {
-        repository.delete(RestaurantMapper.toJpaEntity(restaurant));
-    }
 
     @Override
     public void deleteById(UUID id) {

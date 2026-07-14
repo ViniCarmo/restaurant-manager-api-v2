@@ -50,10 +50,6 @@ public class UserRepositoryImpl implements UserRepository {
         return repository.existsByEmailIgnoreCase(email);
     }
 
-    @Override
-    public void delete(User user) {
-        repository.delete(UserMapper.toJpaEntity(user));
-    }
 
     @Override
     public void deleteById(UUID id) {

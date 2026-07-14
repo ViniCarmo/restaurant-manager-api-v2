@@ -5,17 +5,19 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.Repository.UserRepository;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
 
+import java.util.UUID;
+
 @Component
-public class FindUserByEmailUseCase {
+public class FindUserByIdUseCase {
 
     private final UserRepository userRepository;
 
-    public FindUserByEmailUseCase(UserRepository userRepository) {
+
+    public FindUserByIdUseCase(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
-    public User execute(String email) {
-        return userRepository.findByEmailIgnoreCase(email).orElseThrow(() -> new UserNotFoundException(email));
-
+    public User execute(UUID id) {
+        return userRepository.findById(id).orElseThrow(() -> new UserNotFoundException(id));
     }
 }

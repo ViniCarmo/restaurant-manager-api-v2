@@ -20,16 +20,16 @@ public class MenuItemController {
 
     private final CreateMenuUseCase createMenuUseCase;
     private final DeleteMenuByIdUseCase deleteMenuByIdUseCase;
-    private final FindByIdMenuUseCase findByIdMenuUseCase;
-    private final FindMenuByRestaurantUseCase findMenuByRestaurantUseCase;
+    private final FindMenuItemByIdUseCase findMenuItemByIdUseCase;
+    private final ListMenuItemsByRestaurantUseCase listMenuItemsByRestaurantUseCase;
     private final GetAllMenuItemUseCase getAllMenuItemUseCase;
     private final UpdateMenuItemUseCase updateMenuItemUseCase;
 
-    public MenuItemController(CreateMenuUseCase createMenuUseCase, DeleteMenuByIdUseCase deleteMenuByIdUseCase, FindByIdMenuUseCase findByIdMenuUseCase, FindMenuByRestaurantUseCase findMenuByRestaurantUseCase, GetAllMenuItemUseCase getAllMenuItemUseCase, UpdateMenuItemUseCase updateMenuItemUseCase) {
+    public MenuItemController(CreateMenuUseCase createMenuUseCase, DeleteMenuByIdUseCase deleteMenuByIdUseCase, FindMenuItemByIdUseCase findMenuItemByIdUseCase, ListMenuItemsByRestaurantUseCase listMenuItemsByRestaurantUseCase, GetAllMenuItemUseCase getAllMenuItemUseCase, UpdateMenuItemUseCase updateMenuItemUseCase) {
         this.createMenuUseCase = createMenuUseCase;
         this.deleteMenuByIdUseCase = deleteMenuByIdUseCase;
-        this.findByIdMenuUseCase = findByIdMenuUseCase;
-        this.findMenuByRestaurantUseCase = findMenuByRestaurantUseCase;
+        this.findMenuItemByIdUseCase = findMenuItemByIdUseCase;
+        this.listMenuItemsByRestaurantUseCase = listMenuItemsByRestaurantUseCase;
         this.getAllMenuItemUseCase = getAllMenuItemUseCase;
         this.updateMenuItemUseCase = updateMenuItemUseCase;
     }
@@ -66,7 +66,7 @@ public class MenuItemController {
 
         return ResponseEntity.ok(
                 MenuItemPresentationMapper.toResponse(
-                        findByIdMenuUseCase.execute(id)
+                        findMenuItemByIdUseCase.execute(id)
                 )
         );
     }
@@ -75,7 +75,7 @@ public class MenuItemController {
     public ResponseEntity<List<MenuItemResponseDto>> findByRestaurant(
             @PathVariable UUID restaurantId) {
 
-        List<MenuItemResponseDto> response = findMenuByRestaurantUseCase.execute(restaurantId)
+        List<MenuItemResponseDto> response = listMenuItemsByRestaurantUseCase.execute(restaurantId)
                 .stream()
                 .map(MenuItemPresentationMapper::toResponse)
                 .toList();

@@ -8,10 +8,10 @@ import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.
 import java.util.UUID;
 
 @Component
-public class RestaurantFindByIdUseCase {
+public class FindRestaurantByIdUseCase {
   private final RestaurantRepository restaurantRepository;
 
-    public RestaurantFindByIdUseCase(RestaurantRepository restaurantRepository) {
+    public FindRestaurantByIdUseCase(RestaurantRepository restaurantRepository) {
         this.restaurantRepository = restaurantRepository;
     }
 

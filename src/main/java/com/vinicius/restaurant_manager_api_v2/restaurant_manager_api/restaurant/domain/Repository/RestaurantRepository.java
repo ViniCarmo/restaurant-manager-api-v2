@@ -19,8 +19,6 @@ public interface RestaurantRepository {
 
     boolean existsByNameIgnoreCase(String name);
 
-    void delete(Restaurant restaurant);
-
     void deleteById(UUID id);
 
     List<Restaurant> searchRestaurant(String name, KitchenType kitchenType);

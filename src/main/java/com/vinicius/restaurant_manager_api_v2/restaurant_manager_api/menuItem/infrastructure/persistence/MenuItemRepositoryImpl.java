@@ -2,7 +2,7 @@ package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.i
 
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.entity.MenuItem;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.domain.repository.MenuItemRepository;
-import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.entity.MenuItemJpaEntity;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.infrastructure.entity.MenuItemJpaEntity;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.menuItem.infrastructure.mapper.MenuItemMapper;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.domain.entity.Restaurant;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.restaurant.infrastructure.persistence.mapper.RestaurantMapper;
@@ -56,7 +56,7 @@ public class MenuItemRepositoryImpl implements MenuItemRepository {
 
     @Override
     public void delete(MenuItem menuItem) {
-        repository.delete(MenuItemMapper.toJpaEntity(menuItem));
+        repository.deleteById(MenuItemMapper.toJpaEntity(menuItem).getId());
     }
 
     @Override

@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.UUID;
 
 @RestController
@@ -22,20 +21,19 @@ public class UserController {
 
     private final CreateUserUseCase createUserUseCase;
     private final DeleteUserByIdUseCase deleteUserByIdUseCase;
-    private final FindByIdUseCase findByIdUseCase;
-    private final FindUserByEmailUseCase findUserByEmailUseCase;
+    private final FindUserByIdUseCase findUserByIdUseCase;
+    private final SearchUserByEmailUseCase searchUserByEmailUseCase;
     private final UpdateUserPasswordUseCase updateUserPasswordUseCase;
     private final UpdateUserUseCase updateUserUseCase;
 
-    public UserController(CreateUserUseCase createUserUseCase, DeleteUserByIdUseCase deleteUserByIdUseCase, FindByIdUseCase findByIdUseCase, FindUserByEmailUseCase findUserByEmailUseCase, UpdateUserPasswordUseCase updateUserPasswordUseCase, UpdateUserUseCase updateUserUseCase) {
+    public UserController(CreateUserUseCase createUserUseCase, DeleteUserByIdUseCase deleteUserByIdUseCase, FindUserByIdUseCase findUserByIdUseCase, SearchUserByEmailUseCase searchUserByEmailUseCase, UpdateUserPasswordUseCase updateUserPasswordUseCase, UpdateUserUseCase updateUserUseCase) {
         this.createUserUseCase = createUserUseCase;
         this.deleteUserByIdUseCase = deleteUserByIdUseCase;
-        this.findByIdUseCase = findByIdUseCase;
-        this.findUserByEmailUseCase = findUserByEmailUseCase;
+        this.findUserByIdUseCase = findUserByIdUseCase;
+        this.searchUserByEmailUseCase = searchUserByEmailUseCase;
         this.updateUserPasswordUseCase = updateUserPasswordUseCase;
         this.updateUserUseCase = updateUserUseCase;
     }
-
 
     @PostMapping
     public ResponseEntity<UserResponseDto> create(
@@ -58,7 +56,7 @@ public class UserController {
 
         return ResponseEntity.ok(
                 UserPresentationMapper.toResponse(
-                        findByIdUseCase.execute(id)
+                        findUserByIdUseCase.execute(id)
                 )
         );
     }
@@ -69,7 +67,7 @@ public class UserController {
 
         return ResponseEntity.ok(
                 UserPresentationMapper.toResponse(
-                        findUserByEmailUseCase.execute(email)
+                        searchUserByEmailUseCase.execute(email)
                 )
         );
     }
