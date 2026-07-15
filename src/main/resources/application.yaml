@@ -3,9 +3,9 @@ spring:
     name: restaurant-manager-api-v2
 
   datasource:
-    url: jdbc:postgresql://localhost:5433/restaurant_manager_v2
-    username: postgres
-    password: admin
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/restaurant_manager}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:postgres}
   jpa:
     hibernate:
       ddl-auto: validate
