@@ -107,6 +107,13 @@ class UserControllerIntegrationTest {
     }
 
     @Test
+    void shouldReturn403WhenTokenIsMalformed() throws Exception {
+        mockMvc.perform(get("/api/v1/users/" + existingUser.getId())
+                        .header("Authorization", "Bearer not-a-valid-jwt"))
+                .andExpect(status().isForbidden());
+    }
+
+    @Test
     void shouldFindUserByEmail() throws Exception {
         mockMvc.perform(get("/api/v1/users/search")
                         .with(asUser(existingUser))
