@@ -210,6 +210,13 @@ Com a aplicação em execução, acesse:
 ```
 http://localhost:8080/swagger-ui.html
 ```
+## Collection Postman
+
+A collection com exemplos de requisições para todos os endpoints está disponível em
+[`postman/collections`](./postman/collections).
+
+Para importar: abra o Postman → **Import** → selecione o arquivo `.json` da pasta.
+
 
 Para testar endpoints protegidos: realize o login em `/api/v1/auth/login`, copie o token retornado, clique em **Authorize** e cole o token.
 
@@ -237,6 +244,9 @@ restaurant-manager-api-v2/
 ├── docker-compose.yml
 ├── Dockerfile
 └── pom.xml
+
+
+
 ```
 **Autor:** Vinicius Carmo
 [LinkedIn](https://www.linkedin.com/in/viniciuscarmoo/) · [GitHub](https://github.com/ViniCarmo)
