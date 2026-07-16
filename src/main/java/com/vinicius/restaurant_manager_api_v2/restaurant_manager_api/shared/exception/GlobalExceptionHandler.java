@@ -18,6 +18,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.EmailAlreadyInUseException;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserAccessDeniedException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
 
 import java.time.LocalDateTime;
@@ -63,9 +64,8 @@ public class GlobalExceptionHandler  {
                 .body(new ErrorResponse(LocalDateTime.now(), 401, "Invalid email or password"));
     }
 
-    @ExceptionHandler(RestaurantAccessDeniedException.class)
-    public ResponseEntity<ErrorResponse> handleForbidden(
-            RestaurantAccessDeniedException ex) {
+    @ExceptionHandler({RestaurantAccessDeniedException.class, UserAccessDeniedException.class})
+    public ResponseEntity<ErrorResponse> handleForbidden(RuntimeException ex) {
 
         return ResponseEntity.status(HttpStatus.FORBIDDEN)
                 .body(ErrorResponse.of(

@@ -1,7 +1,9 @@
 package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.application.useCases;
 
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.shared.security.AuthenticatedUserProvider;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.Repository.UserRepository;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserAccessDeniedException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.entity.UserType;
 import org.junit.jupiter.api.BeforeEach;
@@ -23,18 +25,22 @@ class UpdateUserPasswordUseCaseTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private AuthenticatedUserProvider authenticatedUserProvider;
+
     private UpdateUserPasswordUseCase updateUserPasswordUseCase;
 
     @BeforeEach
     void setUp() {
-        updateUserPasswordUseCase = new UpdateUserPasswordUseCase(userRepository);
+        updateUserPasswordUseCase = new UpdateUserPasswordUseCase(userRepository, authenticatedUserProvider);
     }
 
     @Test
-    void shouldUpdatePasswordWhenUserExists() {
+    void shouldUpdatePasswordWhenUserExistsAndIsLoggedUser() {
         UUID id = UUID.randomUUID();
         User user = User.create("Vinicius", "vinicius@email.com", "123456", UserType.create("CUSTOMER"));
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(id);
 
         updateUserPasswordUseCase.execute(id, "novaSenha");
 
@@ -48,6 +54,19 @@ class UpdateUserPasswordUseCaseTest {
         when(userRepository.findById(id)).thenReturn(Optional.empty());
 
         assertThrows(UserNotFoundException.class,
+                () -> updateUserPasswordUseCase.execute(id, "novaSenha"));
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
+    void shouldThrowExceptionWhenLoggedUserIsNotTheTargetUser() {
+        UUID id = UUID.randomUUID();
+        User user = User.create("Vinicius", "vinicius@email.com", "123456", UserType.create("CUSTOMER"));
+        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(UUID.randomUUID());
+
+        assertThrows(UserAccessDeniedException.class,
                 () -> updateUserPasswordUseCase.execute(id, "novaSenha"));
 
         verify(userRepository, never()).save(any());

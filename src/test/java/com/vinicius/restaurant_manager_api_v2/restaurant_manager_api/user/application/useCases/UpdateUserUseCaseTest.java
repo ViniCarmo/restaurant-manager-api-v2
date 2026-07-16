@@ -1,9 +1,11 @@
 package com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.application.useCases;
 
 
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.shared.security.AuthenticatedUserProvider;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.Repository.UserRepository;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.entity.User;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.EmailAlreadyInUseException;
+import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserAccessDeniedException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.user.domain.exceptions.UserNotFoundException;
 import com.vinicius.restaurant_manager_api_v2.restaurant_manager_api.userType.domain.entity.UserType;
 import org.junit.jupiter.api.BeforeEach;
@@ -27,11 +29,14 @@ class UpdateUserUseCaseTest {
     @Mock
     private UserRepository userRepository;
 
+    @Mock
+    private AuthenticatedUserProvider authenticatedUserProvider;
+
     private UpdateUserUseCase updateUserUseCase;
 
     @BeforeEach
     void setUp() {
-        updateUserUseCase = new UpdateUserUseCase(userRepository);
+        updateUserUseCase = new UpdateUserUseCase(userRepository, authenticatedUserProvider);
     }
 
     @Test
@@ -39,6 +44,7 @@ class UpdateUserUseCaseTest {
         UUID id = UUID.randomUUID();
         User user = User.create("Vinicius", "vinicius@email.com", "123456", UserType.create("CUSTOMER"));
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(id);
         when(userRepository.findByEmailIgnoreCase("novo@email.com")).thenReturn(Optional.empty());
         when(userRepository.save(user)).thenReturn(user);
 
@@ -60,6 +66,19 @@ class UpdateUserUseCaseTest {
     }
 
     @Test
+    void shouldThrowExceptionWhenLoggedUserIsNotTheTargetUser() {
+        UUID id = UUID.randomUUID();
+        User user = User.create("Vinicius", "vinicius@email.com", "123456", UserType.create("CUSTOMER"));
+        when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(UUID.randomUUID());
+
+        assertThrows(UserAccessDeniedException.class,
+                () -> updateUserUseCase.execute(id, "Nome", "email@email.com"));
+
+        verify(userRepository, never()).save(any());
+    }
+
+    @Test
     void shouldThrowExceptionWhenEmailBelongsToAnotherUser() {
         UUID id = UUID.randomUUID();
         UUID otherId = UUID.randomUUID();
@@ -67,6 +86,7 @@ class UpdateUserUseCaseTest {
         User otherUser = User.create("Outro", "novo@email.com", "123456", UserType.create("CUSTOMER"));
 
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(id);
         when(userRepository.findByEmailIgnoreCase("novo@email.com")).thenReturn(Optional.of(otherUser));
 
         assertThrows(EmailAlreadyInUseException.class,
@@ -80,6 +100,7 @@ class UpdateUserUseCaseTest {
         UUID id = UUID.randomUUID();
         User user = new User(id, "Vinicius", "vinicius@email.com", "123456", UserType.create("CUSTOMER"), LocalDateTime.now(), LocalDateTime.now());
         when(userRepository.findById(id)).thenReturn(Optional.of(user));
+        when(authenticatedUserProvider.getLoggedUserId()).thenReturn(id);
         when(userRepository.findByEmailIgnoreCase("vinicius@email.com")).thenReturn(Optional.of(user));
         when(userRepository.save(user)).thenReturn(user);
 
