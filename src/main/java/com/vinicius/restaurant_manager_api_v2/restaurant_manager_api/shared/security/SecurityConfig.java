@@ -34,9 +34,11 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
                         .requestMatchers("/swagger-ui/**", "/v3/api-docs/**").permitAll()
 
-                        // UserType — leitura liberada para autenticados, escrita também (sem role específica)
+                        // UserType — criação pública (necessária para o cadastro poder referenciar um tipo válido)
+                        .requestMatchers(HttpMethod.POST, "/api/v1/user-types").permitAll()
+
+                        // UserType — leitura liberada para autenticados, exclusão também (sem role específica)
                         .requestMatchers(HttpMethod.GET, "/api/v1/user-types/**").authenticated()
-                        .requestMatchers(HttpMethod.POST, "/api/v1/user-types").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/user-types/**").authenticated()
 
                         // Restaurantes — Customer e RestaurantOwner podem visualizar/buscar
