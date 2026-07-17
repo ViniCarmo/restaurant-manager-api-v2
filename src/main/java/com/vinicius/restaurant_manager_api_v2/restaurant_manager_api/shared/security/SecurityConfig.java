@@ -41,18 +41,18 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.GET, "/api/v1/user-types/**").authenticated()
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/user-types/**").authenticated()
 
-                        // Restaurantes — Customer e RestaurantOwner podem visualizar/buscar
-                        .requestMatchers(HttpMethod.GET, "/api/v1/restaurants/**").hasAnyRole("CUSTOMER", "RESTAURANT_OWNER")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/restaurants").hasAnyRole("CUSTOMER", "RESTAURANT_OWNER")
+                        // Restaurantes — leitura pública (sem necessidade de login)
+                        .requestMatchers(HttpMethod.GET, "/api/v1/restaurants/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/restaurants").permitAll()
 
                         // Restaurantes — apenas RestaurantOwner cria/altera/exclui
                         .requestMatchers(HttpMethod.POST, "/api/v1/restaurants").hasRole("RESTAURANT_OWNER")
                         .requestMatchers(HttpMethod.PUT, "/api/v1/restaurants/**").hasRole("RESTAURANT_OWNER")
                         .requestMatchers(HttpMethod.DELETE, "/api/v1/restaurants/**").hasRole("RESTAURANT_OWNER")
 
-                        // Cardápio — Customer e RestaurantOwner podem visualizar/buscar
-                        .requestMatchers(HttpMethod.GET, "/api/v1/menu-items/**").hasAnyRole("CUSTOMER", "RESTAURANT_OWNER")
-                        .requestMatchers(HttpMethod.GET, "/api/v1/menu-items").hasAnyRole("CUSTOMER", "RESTAURANT_OWNER")
+                        // Cardápio — leitura pública (sem necessidade de login)
+                        .requestMatchers(HttpMethod.GET, "/api/v1/menu-items/**").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/v1/menu-items").permitAll()
 
                         // Cardápio — apenas RestaurantOwner cria/altera/exclui
                         .requestMatchers(HttpMethod.POST, "/api/v1/menu-items").hasRole("RESTAURANT_OWNER")
