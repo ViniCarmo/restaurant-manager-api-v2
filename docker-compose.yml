@@ -28,7 +28,7 @@ services:
       SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/restaurant_manager
       SPRING_DATASOURCE_USERNAME: postgres
       SPRING_DATASOURCE_PASSWORD: postgres
-      JWT_SECRET: ${JWT_SECRET:-troque-essa-chave-em-producao}
+      JWT_SECRET: ${JWT_SECRET:-troque-essa-chave-secreta-antes-de-ir-para-producao}
 
 volumes:
   postgres_data:
