@@ -140,7 +140,7 @@ Todos os endpoints seguem o prefixo `/api/v1`. Documentação interativa complet
 
 | Método | Endpoint | Descrição | Autenticação |
 |---|---|---|---|
-| POST | `/api/v1/user-types` | Cria um tipo de usuário | Sim |
+| POST | `/api/v1/user-types` | Cria um tipo de usuário | Não |
 | GET | `/api/v1/user-types` | Lista todos os tipos de usuário | Sim |
 | GET | `/api/v1/user-types/{id}` | Busca um tipo de usuário por ID | Sim |
 | GET | `/api/v1/user-types/search?name=` | Busca um tipo de usuário por nome | Sim |
@@ -190,6 +190,7 @@ A autorização acontece em dois níveis:
 
 - **Role** (Spring Security) — define quais tipos de usuário podem, em geral, acessar cada endpoint.
 - **Posse do recurso** (domínio) — mesmo sendo `RESTAURANT_OWNER`, o usuário só pode alterar ou excluir restaurantes e itens de cardápio **dos quais ele é o dono**, validado via `restaurant.belongsTo(loggedUser)` em cada caso de uso sensível. Essa checagem evita que um proprietário manipule recursos pertencentes a outro.
+- **Autoacesso** (domínio) — nos endpoints de `User`, o usuário autenticado só pode visualizar, atualizar, excluir ou trocar a senha **da própria conta**. Qualquer tentativa de acessar o `id` de outro usuário é bloqueada com `403 Forbidden`, mesmo estando autenticado.
 
 ## Testes
 
